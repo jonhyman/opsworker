@@ -1,17 +1,17 @@
-lib = File.expand_path('../lib/', __FILE__)
-$:.unshift lib unless $:.include?(lib)
-require "lib/ops_worker/version/version"
+$LOAD_PATH << File.dirname(__FILE__)
+require "lib/ops_worker/version"
 
 Gem::Specification.new do |s|
-  s.name        = 'OpsWorker'
-  s.version     = OpsWorker::VERSION
-  s.date        = '2013-04-13'
-  s.summary     = "A simple wrapper for common OpsWorks tasks."
-  s.description = "A simple wrapper for common OpsWorks tasks."
-  s.authors     = "Jon Hyman"
-  s.email       = "jon@appboy.com"
-  s.files        = Dir.glob("lib/**/*") + %w(LICENSE README.md Rakefile)
+  s.name         = 'ops_worker'
+  s.version      = OpsWorker::VERSION
+  s.date         = '2013-04-13'
+  s.summary      = "A simple wrapper for common OpsWorks tasks."
+  s.description  = "A simple wrapper for common OpsWorks tasks."
+  s.authors      = "Jon Hyman"
+  s.email        = "jon@appboy.com"
+  s.files        = Dir.glob("lib/**/*") + %w(README.md)
   s.require_path = 'lib'
+  s.homepage     = 'https://github.com/jonhyman/opsworker'
 
   s.add_dependency("aws-sdk")
   s.add_development_dependency("rspec")
