@@ -75,7 +75,7 @@ module OpsWorker
     # @param recipe_names Array of string recipe names, e.g., ["custom::recipe1"]
     def execute_recipes(recipe_names)
       OpsWorker.logger.info {"Executing recipes #{recipe_names} on #{@name}"}
-      create_deployment(:execute_recipes, {:recipes => recipe_names}, :all)
+      create_deployment(:execute_recipes, {"recipes" => recipe_names}, :all)
     end
 
     def to_s
