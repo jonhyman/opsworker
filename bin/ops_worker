@@ -5,6 +5,7 @@ require 'ops_worker/cli'
 
 begin
   OpsWorker::CLI.start()
-rescue
+rescue => e
+  OpsWorker.logger.error { "Caught error running command: #{e.inspect()}" }
   exit(1)
 end

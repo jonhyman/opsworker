@@ -43,6 +43,10 @@ module OpsWorker
     def deploy(revision = nil)
       OpsWorker.logger.info {"Deploying app #{@name} from #{revision || @revision}"}
 
+      if deploying?
+        raise StandardError.new("#{@name} is already deploying")
+      end
+
       existing_revision = @revision.dup()
       changing_revisions = revision && revision != existing_revision
 
@@ -106,6 +110,21 @@ module OpsWorker
                                                   :instance_ids => instance_ids
       )
       DeploymentStatus.new(result[:deployment_id], @opsworks_client)
+    end
+
+    # This is a best-efforts way to check if the current system is deploying by seeing if there is a deployment in
+    # progress that is running
+    def deploying?
+      deployments = @opsworks_client.describe_deployments(:app_id => @id)[:deployments]
+      if deployments.length > 0
+        latest_deployment = deployments.first
+
+        if latest_deployment[:status] == "running"
+          return true
+        end
+      end
+
+      false
     end
 
     def app_server_instances
