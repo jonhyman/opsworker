@@ -12,7 +12,9 @@ Gem::Specification.new do |s|
   s.files        = Dir.glob("lib/**/*") + %w(README.md)
   s.require_path = 'lib'
   s.homepage     = 'https://github.com/jonhyman/opsworker'
+  s.executables << 'ops_worker'
 
   s.add_dependency("aws-sdk")
+  s.add_dependency("trollop")
   s.add_development_dependency("rspec")
 end

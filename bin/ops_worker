@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require 'ops_worker'
+require 'ops_worker/cli'
+
+begin
+  OpsWorker::CLI.start()
+rescue
+  exit(1)
+end
