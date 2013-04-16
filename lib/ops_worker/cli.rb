@@ -5,7 +5,7 @@ module OpsWorker
     def self.start
       client = OpsWorker::Client.new
 
-      sub_commands = ["deploy", "rollback", "update_cookbooks", "execute_recipe"]
+      sub_commands = ["deploy", "rollback", "update_cookbooks", "execute_recipe", "restart"]
       opts = Trollop::options do
         banner "ops_worker AWS OpsWorks helper"
         opt :app, "Application", :type => :string, :short => :a, :required => true
@@ -31,6 +31,8 @@ module OpsWorker
             opt :recipe_name, "Recipe name", :type => :string, :required => true
           end
           app.execute_recipes([command_opts[:recipe_name]])
+        when "restart"
+          app.restart()
         else
           Trollop::die("Unknown command #{command}")
       end
