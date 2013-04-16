@@ -5,7 +5,14 @@ Quick command line tool for handling servers on OpsWorks.
 ## Installation
     gem install ops_worker
 
-## Example
+## Command Line Example
+    ops_worker --app homepage_staging deploy
+    ops_worker --app homepage_staging deploy --branch feature/new-feature
+    ops_worker --app homepage_staging rollback
+    ops_worker --app homepage_staging update_cookbooks
+    ops_worker --app homepage_staging execute_recipe --recipe-name monit
+
+## Ruby Example
 ```ruby
 require 'ops_worker'
 
