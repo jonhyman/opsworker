@@ -19,7 +19,7 @@ module OpsWorker
       case command
         when "deploy"
           command_opts = Trollop::options do
-            opt :branch, :type => :string
+            opt :branch, "Branch", :type => :string
           end
           app.deploy(command_opts[:branch])
         when "rollback"
@@ -28,7 +28,7 @@ module OpsWorker
           app.update_cookbooks()
         when "execute_recipe"
           command_opts = Trollop::options do
-            opt :recipe_name, :type => :string, :required => true
+            opt :recipe_name, "Recipe name", :type => :string, :required => true
           end
           app.execute_recipes([command_opts[:recipe_name]])
         else

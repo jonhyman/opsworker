@@ -43,14 +43,16 @@ module OpsWorker
     def deploy(revision = nil)
       OpsWorker.logger.info {"Deploying app #{@name} from #{revision || @revision}"}
 
-      if revision
-        existing_revision = @revision.dup()
+      existing_revision = @revision.dup()
+      changing_revisions = revision && revision != existing_revision
+
+      if changing_revisions
         update_revision(revision)
       end
 
       deployment_status = create_deployment(:deploy)
 
-      if revision
+      if changing_revisions
         update_revision(existing_revision)
       end
 
