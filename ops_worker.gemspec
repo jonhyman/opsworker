@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage     = 'https://github.com/jonhyman/opsworker'
   s.executables << 'ops_worker'
 
-  s.add_dependency("aws-sdk")
+  s.add_dependency("aws-sdk", ">= 1.8.3")
   s.add_dependency("trollop")
   s.add_development_dependency("rspec")
 end
